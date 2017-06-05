@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response>
+	<status>
+		<timeStamp>1395932927084</timeStamp>
+		<error_code>0</error_code>
+		<error_description/>
+		<error_message/>
+		<api_version>1.0</api_version>
+	</status>
+	<data>
+		<content>
+			<id>id_of_a_post</id>
+			<name>Learning-jQuery</name>
+			<title>Learning jQuery</title>
+			<description/>
+			<summary/>
+			<image>/path/to/image/image.jpg</image>
+			<image_size>143591</image_size>
+			<thumbnail>/path/to/image/thumbnail.jpg</thumbnail>
+			<published_on>1385355600000</published_on>
+		</content>
+	</data>
+</response>
