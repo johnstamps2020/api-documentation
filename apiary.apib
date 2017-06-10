@@ -1,70 +1,114 @@
 FORMAT: 1A
-HOST: http://api.spiderlog.net
+HOST: http://polls.apiblueprint.org/
 
-# Spider Log API
+# Polls
 
-Provides services for Spider Log app family, recording the world's spider sightings
+Polls is a simple API allowing consumers to view polls and vote in them.
 
-# Group Spiders
-Access to Spider resources
+## Questions Collection [/questions]
 
-## My Spiders [/spiders{?page,size}]
-### Get all my spider sightings [GET]
+### List All Questions [GET]
 
-+ Parameters
-    + page (required, number) - page number
-    + size (required, number)- page size
-    
-+ Request
-
-    + Header
-    
-            Authorization: Basic dXNlcjpwYXNzd29yZA==
-            x-api-version: 1.0
-        
 + Response 200 (application/json)
 
-    + Header
-    
-            cache-control: max-ago=600
-        
-    + Body
-
+        [
             {
-                "page" : 
-                {
-                    "number" : 1,
-                    "size" : 10,
-                    "totalPages" : 20
-                },
-                "spiders" : 
-                [
-                    
+                "question": "Favourite programming language?",
+                "published_at": "2015-08-05T08:40:51.620Z",
+                "choices": [
                     {
-                        "sightedAt" : "2016-08-29T19:00",
-                        "imageUrl" : "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Huntsman_spider.jpg/619px-Huntsman_spider.jpg",
-                        "description" : "Spider I saw at home",
-                        "tags": [
-                            "big",
-                            "stripy"
-                            ]
-                    }, 
-                    {
-                        "sightedAt" : "2016-08-29T19:00",
-                        "imageUrl" : "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Mouse_spider.jpg/800px-Mouse_spider.jpg",
-                        "description" : "Spider I saw at the office",
-                        "tags": [
-                            "big"
-                            ]
-                    }, 
-                    {
-                        "sightedAt" : "2016-08-29T19:00",
-                        "imageUrl" : "https://upload.wikimedia.org/wikipedia/en/0/01/Spider-man_man-spider.jpg",
-                        "description" : "Spider I saw at train",
-                        "tags": [
-                            "big",
-                            "stripy"
-                            ]
+                        "choice": "Swift",
+                        "votes": 2048
+                    }, {
+                        "choice": "Python",
+                        "votes": 1024
+                    }, {
+                        "choice": "Objective-C",
+                        "votes": 512
+                    }, {
+                        "choice": "Ruby",
+                        "votes": 256
                     }
                 ]
             }
+        ]
+
+### Create a New Question [POST]
+
+You may create your own question using this action. It takes a JSON
+object containing a question and a collection of answers in the
+form of choices.
+
++ Request (application/json)
+
+        {
+            "question": "Favourite programming language?",
+            "choices": [
+                "Swift",
+                "Python",
+                "Objective-C",
+                "Ruby"
+            ]
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /questions/2
+
+    + Body
+
+            {
+                "question": "Favourite programming language?",
+                "published_at": "2015-08-05T08:40:51.620Z",
+                "choices": [
+                    {
+                        "choice": "Swift",
+                        "votes": 0
+                    }, {
+                        "choice": "Python",
+                        "votes": 0
+                    }, {
+                        "choice": "Objective-C",
+                        "votes": 0
+                    }, {
+                        "choice": "Ruby",
+                        "votes": 0
+                    }
+                ]
+            }
+            
+## Question [/questions/{question_id}]
+
++ Parameters
+    + question_id (number) - ID of the Question in the form of an integer
+    
+### View a Questions Detail [GET]
+
++ Response 200 (application/json)
+
+        {
+            "question": "Favourite programming language?",
+            "published_at": "2014-11-11T08:40:51.620Z",
+            "url": "/questions/1",
+            "choices": [
+                {
+                    "choice": "Swift",
+                    "url": "/questions/1/choices/1",
+                    "votes": 2048
+                }, {
+                    "choice": "Python",
+                    "url": "/questions/1/choices/2",
+                    "votes": 1024
+                }, {
+                    "choice": "Objective-C",
+                    "url": "/questions/1/choices/3",
+                    "votes": 512
+                }, {
+                    "choice": "Ruby",
+                    "url": "/questions/1/choices/4",
+                    "votes": 256
+                }
+            ]
+        }
