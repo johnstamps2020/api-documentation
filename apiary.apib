@@ -79,6 +79,8 @@ form of choices.
                 ]
             }
             
+
+            
 ## Question [/questions/{question_id}]
 
 + Parameters
@@ -116,3 +118,35 @@ form of choices.
 ### Delete [DELETE]
 
 + Response 204
+
+## Message [/message]
+
+### Retrieve Message [GET]
+
++ Request
+
+    + Headers
+    
+            Authorization: Basic ABCDEF
+            
++ Response 200 (application/json)
+
+        {
+        
+            "message":"Hello World!"
+        }
+        
++ Request (application/json)
+    + Body
+
+            {
+               "grant_type": "client_credentials"
+            }
+
++ Response 401 (text/plain)
+
+        There is no such a message for you, dear guest.
+
++ Response 410 (text/plain)
+
+        The message you are searching for does not exist anymore.
