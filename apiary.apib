@@ -122,6 +122,12 @@ form of choices.
 ## Message [/message]
 
 ### Retrieve Message [GET]
+This action has **two** responses defined: One returning plain text and the
+other a JSON representation of our resource. Both have the same HTTP status
+code. Also both responses bear additional information in the form of a custom
+HTTP header. Note that both responses have set the `Content-Type` HTTP header
+just by specifying `(text/plain)` or `(application/json)` in their respective
+signatures.
 
 + Request
 
